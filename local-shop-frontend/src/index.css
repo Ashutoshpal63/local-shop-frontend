@@ -1,0 +1,76 @@
+/* src/index.css */
+
+/* 1. Import Tailwind CSS v4 */
+@import "tailwindcss";
+
+/* 2. Define custom theme variables for v4 */
+@theme {
+  --color-primary: theme(colors.cyan.400);
+  --color-primary-glow: theme(colors.cyan.500);
+  --color-secondary: theme(colors.slate.800);
+  --color-accent: theme(colors.slate.600);
+
+  --font-body: "Poppins", sans-serif;
+  --font-heading: "Poppins", sans-serif;
+}
+
+/* 3. Define base layer styles and custom utility classes */
+@layer base {
+  body {
+    @apply bg-slate-900 text-slate-300 font-body;
+    .light & {
+      @apply bg-slate-100 text-slate-700;
+    }
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading text-slate-100;
+    .light & {
+      @apply text-slate-900;
+    }
+  }
+  /* Custom scrollbar for a better look */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: theme(colors.slate.800);
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-accent);
+    border-radius: 20px;
+    border: 2px solid theme(colors.slate.800);
+  }
+}
+
+@layer utilities {
+  /* A reusable glassmorphic card style */
+  .glass-card {
+    @apply bg-black/20 backdrop-blur-lg border border-white/10 rounded-xl;
+    .light & {
+      @apply bg-white/60 border-black/10;
+    }
+  }
+
+  /* A reusable glowing button style */
+  .glow-button {
+    @apply bg-primary text-slate-900 font-bold py-2 px-4 rounded-lg
+           transition-all duration-300
+           hover:bg-primary-glow hover:shadow-[0_0_20px_var(--color-primary-glow)]
+           focus:outline-none focus:ring-2 focus:ring-primary-glow;
+  }
+  .glow-button-secondary {
+     @apply text-slate-300 font-medium py-2 px-4 rounded-lg
+            transition-all duration-300
+            hover:bg-slate-800 hover:text-white;
+  }
+
+  /* Glowing input field style */
+  .glow-input {
+    @apply w-full bg-slate-800 border border-slate-700 rounded-lg py-2 px-3 text-slate-200
+           transition-all duration-300
+           focus:outline-none focus:ring-2 focus:ring-primary-glow focus:border-transparent;
+            .light & {
+      @apply bg-white border-slate-300 text-slate-900 placeholder-slate-400;
+    }
+  }
+}
